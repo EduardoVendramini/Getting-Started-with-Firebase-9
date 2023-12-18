@@ -25,6 +25,30 @@ const db = getFirestore()
 // collection ref
 const colRef = collection(db, 'books')
 
+
+// show all documents form
+const showAllhBookForm = document.querySelector('.showAll');
+
+// event listener for the "Show all docs" button
+showAllhBookForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  let books = [];
+
+  // Query to get all documents
+  const allDocsQuery = query(colRef);
+
+  // Fetch all documents
+  onSnapshot(allDocsQuery, (snapshot) => {
+    snapshot.docs.forEach(doc => {
+      books.push({ ...doc.data(), id: doc.id });
+    });
+    console.clear();
+    console.log('All Documents:', books);
+  });
+});
+
+
 // search form
 const searchBookForm = document.querySelector('.search')
 searchBookForm.addEventListener('submit', (e) => {
@@ -37,7 +61,7 @@ searchBookForm.addEventListener('submit', (e) => {
       books.push({ ...doc.data(), id: doc.id });
     });
     console.clear();
-    console.log(books);
+    console.log("Searched items:", books);
   });
 });
 
