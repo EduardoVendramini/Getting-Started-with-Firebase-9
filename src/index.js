@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app'
 import {
   getFirestore, collection, onSnapshot,
   addDoc, deleteDoc, doc,
-  query, where
+  query, where, orderBy
 } from 'firebase/firestore'
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -53,7 +53,7 @@ showAllhBookForm.addEventListener('submit', (e) => {
 const searchBookForm = document.querySelector('.search')
 searchBookForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  const q = query(colRef, where("title", "==", searchBookForm.searchTitle.value));
+  const q = query(colRef, where("title", "==", searchBookForm.searchTitle.value, orderBy("author", "asc")));
 
   onSnapshot(q, (snapshot) => {
     let books = [];
