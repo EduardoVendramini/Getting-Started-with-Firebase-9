@@ -13,13 +13,14 @@ import {
 } from 'firebase/auth'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDmXgb_58lO7aK_ujN37pGlNxzWGEU0YpI",
-  authDomain: "fb9-sandbox.firebaseapp.com",
-  projectId: "fb9-sandbox",
-  storageBucket: "fb9-sandbox.appspot.com",
-  messagingSenderId: "867529587246",
-  appId: "1:867529587246:web:dc754ab7840c737f47bdbf"
-}
+  apiKey: "AIzaSyA_w0gPpwCgnDSdGM6F8Cu0PJOhSYBNXLA",
+  authDomain: "test-f5e54.firebaseapp.com",
+  projectId: "test-f5e54",
+  storageBucket: "test-f5e54.appspot.com",
+  messagingSenderId: "1031701932584",
+  appId: "1:1031701932584:web:462bc37cd0bcf5f5a5e31d",
+  measurementId: "G-MFGZ4NCL58"
+};
 
 // init firebase
 initializeApp(firebaseConfig)
