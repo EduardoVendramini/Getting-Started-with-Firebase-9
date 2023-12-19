@@ -26,16 +26,13 @@ const db = getFirestore()
 // collection ref
 const colRef = collection(db, 'books')
 
-// queries
-const q = query(colRef, orderBy('createdAt'))
-
 // realtime collection data
-onSnapshot(q, (snapshot) => {
-  let books = []
-  snapshot.docs.forEach(doc => {
-    books.push({ ...doc.data(), id: doc.id })
-  })
-  console.log(books)
+onSnapshot(allDocsQuery, (snapshot) => {
+    snapshot.docs.forEach(doc => {
+      books.push({ ...doc.data(), id: doc.id });
+    });
+    console.clear();
+    console.log('All Documents:', books);
 })
 
 // adding docs
