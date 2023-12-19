@@ -2,10 +2,9 @@ import { initializeApp } from 'firebase/app'
 import {
   getFirestore, collection, onSnapshot,
   addDoc, deleteDoc, doc,
-  query, where, orderBy
+  query, where, orderBy, serverTimestamp
 } from 'firebase/firestore'
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyA_w0gPpwCgnDSdGM6F8Cu0PJOhSYBNXLA",
   authDomain: "test-f5e54.firebaseapp.com",
@@ -13,7 +12,6 @@ const firebaseConfig = {
   storageBucket: "test-f5e54.appspot.com",
   messagingSenderId: "1031701932584",
   appId: "1:1031701932584:web:462bc37cd0bcf5f5a5e31d",
-  measurementId: "G-MFGZ4NCL58"
 };
 
 // init firebase
@@ -25,20 +23,12 @@ const db = getFirestore()
 // collection ref
 const colRef = collection(db, 'books')
 
-
-// show all documents form
+// show all 
 const showAllhBookForm = document.querySelector('.showAll');
-
-// event listener for the "Show all docs" button
 showAllhBookForm.addEventListener('submit', (e) => {
   e.preventDefault();
-
   let books = [];
-
-  // Query to get all documents
-  const allDocsQuery = query(colRef);
-
-  // Fetch all documents
+  const allDocsQuery = query(colRef, orderBy("createdAt"));
   onSnapshot(allDocsQuery, (snapshot) => {
     snapshot.docs.forEach(doc => {
       books.push({ ...doc.data(), id: doc.id });
@@ -53,7 +43,7 @@ showAllhBookForm.addEventListener('submit', (e) => {
 const searchBookForm = document.querySelector('.search')
 searchBookForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  const q = query(colRef, where("title", "==", searchBookForm.searchTitle.value, orderBy("author", "asc")));
+  const q = query(colRef, where("title", "==", searchBookForm.searchTitle.value, orderBy("createdAt")));
 
   onSnapshot(q, (snapshot) => {
     let books = [];
@@ -73,6 +63,7 @@ addBookForm.addEventListener('submit', (e) => {
   addDoc(colRef, {
     title: addBookForm.title.value,
     author: addBookForm.author.value,
+    createdAt: serverTimestamp()
   })
     .then(() => {
       addBookForm.reset()
