@@ -6,6 +6,7 @@ import {
   orderBy, serverTimestamp
 } from 'firebase/firestore'
 
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyA_w0gPpwCgnDSdGM6F8Cu0PJOhSYBNXLA",
   authDomain: "test-f5e54.firebaseapp.com",
@@ -26,7 +27,7 @@ const db = getFirestore()
 const colRef = collection(db, 'books')
 
 // queries
-const q = query(colRef, where("author", "==", "patrick rothfuss"), orderBy('createdAt'))
+const q = query(colRef, orderBy('createdAt'))
 
 // realtime collection data
 onSnapshot(q, (snapshot) => {
