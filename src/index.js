@@ -43,7 +43,7 @@ showAllhBookForm.addEventListener('submit', (e) => {
 const searchBookForm = document.querySelector('.search')
 searchBookForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  const q = query(colRef, where("title", "==", searchBookForm.searchTitle.value, orderBy("createdAt")));
+  const q = query(colRef, where("title", "==", searchBookForm.searchTitle.value), orderBy("author", "asc"));
 
   onSnapshot(q, (snapshot) => {
     let books = [];
